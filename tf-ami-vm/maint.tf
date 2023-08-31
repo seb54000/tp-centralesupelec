@@ -129,6 +129,16 @@ resource "aws_security_group_rule" "node_port_kube3_test" {
   security_group_id = aws_security_group.tpkube_secgroup.id
 }
 
+resource "aws_security_group_rule" "microk8s_registry" {
+  type              = "ingress"
+  from_port        = 32000
+  to_port          = 32000
+  protocol         = "tcp"
+  cidr_blocks      = ["0.0.0.0/0"]
+  ipv6_cidr_blocks = ["::/0"]
+  security_group_id = aws_security_group.tpkube_secgroup.id
+}
+
 resource "aws_security_group_rule" "xrdp_port" {
   type              = "ingress"
   from_port        = 3389
